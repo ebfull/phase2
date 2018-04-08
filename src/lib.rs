@@ -629,7 +629,7 @@ impl MPCParameters {
             &worker
         );
 
-        // Evaluate for auxillary variables.
+        // Evaluate for auxiliary variables.
         eval(
             coeffs_g1.clone(),
             coeffs_g2.clone(),
