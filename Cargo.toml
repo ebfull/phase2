@@ -13,8 +13,8 @@ rand = "0.4"
 byteorder = "1"
 num_cpus = "1"
 crossbeam = "0.3"
-blake2-rfc = "0.2"
 ff = "0.4.0"
+blake2b_simd = "0.4.1"
 
 [dependencies.bellman]
 git = "https://github.com/filecoin-project/bellman"
