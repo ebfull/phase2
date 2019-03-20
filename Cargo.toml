@@ -9,10 +9,17 @@ license = "MIT/Apache-2.0"
 repository = "https://github.com/ebfull/phase2"
 
 [dependencies]
-pairing = "0.14"
 rand = "0.4"
-bellman = "0.1"
 byteorder = "1"
 num_cpus = "1"
 crossbeam = "0.3"
 blake2-rfc = "0.2"
+ff = "0.4.0"
+
+[dependencies.bellman]
+git = "https://github.com/filecoin-project/bellman"
+branch = "master"
+
+[dependencies.pairing]
+git = "https://github.com/zkcrypto/pairing"
+branch = "master"
