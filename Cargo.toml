@@ -1,12 +1,12 @@
 [package]
-name = "phase2"
+name = "phase21"
 version = "0.2.3"
 authors = ["Sean Bowe <ewillbefull@gmail.com>"]
 description = "Library for performing MPCs for creating zk-SNARK public parameters"
-documentation = "https://docs.rs/phase2"
-homepage = "https://github.com/ebfull/phase2"
+documentation = "https://docs.rs/phase21"
+homepage = "https://github.com/filecoin-project/phase2"
 license = "MIT/Apache-2.0"
-repository = "https://github.com/ebfull/phase2"
+repository = "https://github.com/filecoin-project/phase2"
 
 [dependencies]
 rand = "0.4"
@@ -15,11 +15,9 @@ num_cpus = "1"
 crossbeam = "0.7"
 ff = "0.4.0"
 blake2b_simd = "0.4.1"
+bellperson = "0.2"
+paired = "0.15"
 
-[dependencies.bellman]
-git = "https://github.com/filecoin-project/bellman"
-branch = "master"
-
-[dependencies.pairing]
-git = "https://github.com/filecoin-project/pairing"
-branch = "master"
+[package.metadata.release]
+pre-release-commit-message = "chore(release): release {{version}}"
+pro-release-commit-message = "chore(release): starting development cycle for {{next_version}}"

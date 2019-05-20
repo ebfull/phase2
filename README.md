@@ -1,8 +1,10 @@
-# phase2 [![Crates.io](https://img.shields.io/crates/v/phase2.svg)](https://crates.io/crates/phase2) #
+# phase21 [![Crates.io](https://img.shields.io/crates/v/phase21.svg)](https://crates.io/crates/phase21)
+
+> This is fork of the great [phase2](https://github.com/ebfull/phase2) library.
 
 This library is still under development.
 
-## [Documentation](https://docs.rs/phase2/)
+## [Documentation](https://docs.rs/phase21/)
 
 ## Security Warnings
 
