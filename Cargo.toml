@@ -14,7 +14,7 @@ byteorder = "1"
 num_cpus = "1"
 crossbeam = "0.7"
 ff = "0.4.0"
-blake2b_simd = "0.4.1"
+blake2b_simd = "0.5.8"
 bellperson = "0.3"
 paired = "0.15"
 
