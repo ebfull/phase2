@@ -7,16 +7,19 @@ documentation = "https://docs.rs/phase21"
 homepage = "https://github.com/filecoin-project/phase2"
 license = "MIT/Apache-2.0"
 repository = "https://github.com/filecoin-project/phase2"
+edition = "2018"
 
 [dependencies]
-rand = "0.4"
+rand = "0.7"
 byteorder = "1"
 num_cpus = "1"
 crossbeam = "0.7"
-ff = "0.4.0"
+ff = "0.5.0"
 blake2b_simd = "0.5.8"
-bellperson = "0.3"
-paired = "0.15"
+bellperson = "0.4"
+paired = "0.16"
+groupy = "0.2.0"
+rand_chacha = "0.2.1"
 
 [features]
 default = []
