@@ -1,6 +1,6 @@
 [package]
 name = "phase21"
-version = "0.3.2"
+version = "0.4.0"
 authors = ["Sean Bowe <ewillbefull@gmail.com>"]
 description = "Library for performing MPCs for creating zk-SNARK public parameters"
 documentation = "https://docs.rs/phase21"
