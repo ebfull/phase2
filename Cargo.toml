@@ -16,13 +16,14 @@ num_cpus = "1"
 crossbeam = "0.7"
 ff = { version = "0.2.1", package = "fff" }
 blake2b_simd = "0.5.8"
-bellperson = "0.9.0"
-paired = "0.20.1"
+bellperson = { git = "https://github.com/filecoin-project/bellman", branch = "blstrs", default-features = false }
 groupy = "0.3.0"
 rand_chacha = "0.2.1"
 rayon = "1.2.1"
 log = "0.4.7"
 
 [features]
-default = []
+default = ["pairing"]
 gpu = ["bellperson/gpu"]
+pairing = ["bellperson/pairing"]
+blst = ["bellperson/blst"]
