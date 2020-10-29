@@ -1,6 +1,5 @@
 extern crate bellperson;
 extern crate ff;
-extern crate paired;
 extern crate phase21;
 extern crate rand;
 
@@ -10,13 +9,9 @@ use rand::thread_rng;
 // For benchmarking
 use std::time::{Duration, Instant};
 
-// Bring in some tools for using pairing-friendly curves
-use paired::Engine;
-
 use ff::Field;
 
-// We're going to use the BLS12-381 pairing-friendly elliptic curve.
-use paired::bls12_381::{Bls12, Fr};
+use bellperson::bls::{Bls12, Fr, Engine};
 
 // We'll use these interfaces to construct our circuit.
 use bellperson::{Circuit, ConstraintSystem, SynthesisError};

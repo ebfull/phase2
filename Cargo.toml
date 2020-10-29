@@ -13,16 +13,17 @@ edition = "2018"
 rand = "0.7"
 byteorder = "1"
 num_cpus = "1"
-crossbeam = "0.7"
+crossbeam = "0.8"
 ff = { version = "0.2.1", package = "fff" }
 blake2b_simd = "0.5.8"
-bellperson = "0.10.0"
-paired = "0.20.1"
+bellperson = { version = "0.11", default-features = false }
 groupy = "0.3.0"
 rand_chacha = "0.2.1"
 rayon = "1.2.1"
 log = "0.4.7"
 
 [features]
-default = []
+default = ["pairing"]
 gpu = ["bellperson/gpu"]
+pairing = ["bellperson/pairing"]
+blst = ["bellperson/blst"]
