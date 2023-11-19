@@ -211,6 +211,8 @@ use std::io::{BufReader, Read, Write};
 use std::ops::{AddAssign, Mul};
 use std::sync::Arc;
 
+/// This is our assembly structure that we'll use to synthesize the
+/// circuit into a QAP.
 struct KeypairAssembly<Fr: PrimeField> {
     num_inputs: usize,
     num_aux: usize,
@@ -356,6 +358,8 @@ impl PartialEq for PublicKey {
     }
 }
 
+/// MPC parameters are just like bellman `Parameters` except, when serialized,
+/// they contain a transcript of contributions at the end, which can be verified.
 #[derive(Clone)]
 pub struct MPCParameters {
     params: Parameters<Bls12>,
@@ -499,6 +503,8 @@ impl<W: Write> Write for HashWriter<W> {
     }
 }
 
+/// Hashes to G2 using the first 32 bytes of `digest`. Panics if `digest` is less
+/// than 32 bytes.
 fn hash_to_g2(digest: &[u8]) -> bls12_381::G2Projective {
     assert!(digest.len() >= 32);
     let mut seed = [0u8; 32];
@@ -635,10 +641,24 @@ pub fn verify_contribution(before: &MPCParameters, after: &MPCParameters) -> Res
     Ok(response)
 }
 
+/// Checks if pairs have the same ratio.
 fn same_ratio<G1: pairing::PairingCurveAffine>(g1: (G1, G1), g2: (G1::Pair, G1::Pair)) -> bool {
     g1.0.pairing_with(&g2.1) == g1.1.pairing_with(&g2.0)
 }
 
+/// Computes a random linear combination over v1/v2.
+///
+/// Checking that many pairs of elements are exponentiated by
+/// the same `x` can be achieved (with high probability) with
+/// the following technique:
+///
+/// Given v1 = [a, b, c] and v2 = [as, bs, cs], compute
+/// (a*r1 + b*r2 + c*r3, (as)*r1 + (bs)*r2 + (cs)*r3) for some
+/// random r1, r2, r3. Given (g, g^s)...
+///
+/// e(g, (as)*r1 + (bs)*r2 + (cs)*r3) = e(g^s, a*r1 + b*r2 + c*r3)
+///
+/// ... with high probability.
 fn merge_pairs<G: pairing::PairingCurveAffine>(v1: &[G], v2: &[G]) -> (G, G)
 where
     G::Curve: WnafGroup,
@@ -1329,6 +1349,9 @@ impl MPCParameters {
     }
 }
 
+/// This is a cheap helper utility that exists purely
+/// because Rust still doesn't have type-level integers
+/// and so doesn't implement `PartialEq` for `[T; 64]`
 pub fn contains_contribution(contributions: &[[u8; 64]], my_contribution: &[u8; 64]) -> bool {
     for contrib in contributions {
         if &contrib[..] == &my_contribution[..] {
