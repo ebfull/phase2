@@ -11,9 +11,6 @@
 //! a field element.
 //!
 //! ```rust
-//! extern crate pairing;
-//! extern crate bellman;
-//!
 //! use ff::PrimeField;
 //! use bellman::{
 //!     Circuit,
@@ -40,7 +37,7 @@
 //!         let square = cs.alloc(|| "square", || {
 //!             self.cube_root
 //!                 .ok_or(SynthesisError::AssignmentMissing)
-//!                 .map(|mut root| { root.square() })
+//!                 .map(|root| { root.square() })
 //!         })?;
 //!
 //!         // Enforce that `square` is root^2
@@ -93,7 +90,7 @@
 //!     verify_proof
 //! };
 //!
-//! let rng = &mut rand::thread_rng();
+//! let mut rng = rand::thread_rng();
 //!
 //! // Create public parameters for our circuit
 //! let params = {
@@ -103,7 +100,7 @@
 //!
 //!     generate_random_parameters::<Bls12, _, _>(
 //!         circuit,
-//!         rng
+//!         &mut rng
 //!     ).unwrap()
 //! };
 //!
@@ -114,7 +111,7 @@
 //! for _ in 0..50 {
 //!     // Verifier picks a cube in the field.
 //!     // Let's just make a random one.
-//!     let root = Scalar::random(rng);
+//!     let root = Scalar::random(&mut rng);
 //!     let mut cube = root;
 //!     cube = cube.square();
 //!     cube.mul_assign(&root);
@@ -124,11 +121,11 @@
 //!     let proof = create_random_proof(
 //!         CubeRoot::<Scalar> {
 //!             cube_root: Some(root)
-//!         }, &params, rng
+//!         }, &params, &mut rng
 //!     ).unwrap();
 //!
 //!     // Verifier checks the proof against the cube
-//!     assert!(verify_proof(&pvk, &proof, &[cube]).is_ok());
+//!     assert!(verify_proof(&pvk, &proof, &[cube.clone()]).is_ok());
 //! }
 //! ```
 //! ## Creating parameters
@@ -149,8 +146,6 @@
 //! for our circuit:
 //!
 //! ```rust,ignore
-//! extern crate phase2;
-//!
 //! let mut params = phase2::MPCParameters::new(CubeRoot {
 //!     cube_root: None
 //! }).unwrap();
@@ -167,7 +162,7 @@
 //! ```rust,ignore
 //! // Contribute randomness to the parameters. Remember this hash,
 //! // it's how we know our contribution is in the parameters!
-//! let hash = params.contribute(rng);
+//! let hash = params.contribute(&mut rng);
 //! ```
 //!
 //! These parameters are now secure to use, so long as you weren't
